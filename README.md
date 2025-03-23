@@ -8,4 +8,4 @@ This repository contains documentation and changelog of the Debug Panel Unity as
 - ### [CHANGELOG](https://github.com/GuillemUnity/UnityDebugPanel/blob/main/CHANGELOG.md): Detailed changelog of updates and fixes.
 
 ## 📬 Contact & Support
-For questions or support, open an issue or reach out to [guillem.unity@gmail.com](mailto:guillem.unity@gmail.com).
+For questions or support, open an [issue](https://github.com/GuillemUnity/UnityDebugPanel/issues) or reach out to [guillem.unity@gmail.com](mailto:guillem.unity@gmail.com).
