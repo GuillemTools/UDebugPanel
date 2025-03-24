@@ -97,32 +97,38 @@ This asset has the ability of scanning for properties and methods in C# classes,
 One of such classes may look like this:
 
 ```csharp
-public sealed class ExampleOptionsObject
+class Options
 {
-    public enum ExampleEnum
-    {
-        Enum1,
-        Enum2,
-        Enum3,
-        SomeLongValueThat,
-    }
-
-    [Category("Another Section")]
-    public void ButtonExample() => Debug.Log("Button Action!");
-
-    public bool ToggleExample { get; set; }
-
-    public string DynamicInfoExample { get; set; } = "Dynamic Info";
-
-    public string InfoExample => "Info";
-
-    [NumberRange(-10, 10)]
-    public int IntExample { get; set; }
-
+    [NumberStep(5)]
+    public int IntProperty { get; set; }
+            
     [NumberStep(2.5f)] 
-    public float FloatExample { get; set; }
-
-    public ExampleEnum EnumExample { get; set; }
+    public float FloatProperty { get; set; }
+            
+    [NumberRange(-10, 10)] 
+    public long LongProperty { get; set; }
+            
+    [DisplayName("Bool Property Custom Display Name")]
+    public bool BoolProperty { get; set; }
+    public EnumProperty EnumProperty { get; set; }
+            
+    public string StringValue { get; } = "Text";
+    public int IntValue => IntProperty;
+    public float FloatValue => FloatProperty;
+    public long LongValue => LongProperty;
+    public bool BoolValue => BoolProperty;
+    public EnumProperty EnumValue => EnumProperty;
+            
+    public void Method()
+    {
+        Debug.Log("Calling Method");
+    }
+            
+    [Category("Another Section")]
+    public int IntProperty2 { get; set; }
+            
+    [Category("Another Section")]
+    public int FloatProperty2 { get; set; }
 }
 ```
 
@@ -134,7 +140,8 @@ UDebugPanel.AddOptionsObject(new ExampleOptionsObject());
 
 And we will get debug options like this:
 
-![Reflection](https://github.com/Guillemsc/GDebugPanelGodot/assets/17142208/9b75af62-8de2-4295-ac66-ababfec26ed4)
+![Reflection](https://github.com/user-attachments/assets/b4c068de-7087-4c2d-84d3-7e2a72d6b403)
+
 
 > [!NOTE]
 > You can see this functionality on the example DebugPanel.Reflection.
