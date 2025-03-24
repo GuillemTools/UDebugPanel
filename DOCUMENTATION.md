@@ -78,7 +78,12 @@ You can modify this behaviour using the method parameters.
 
 ### Controller navigation
 The panel has support for navigation with a controller or keyboard.
-You can enable controller navigation by calling ```UDebugPanel.SetControllerSupport(true)```.
+You can enable controller navigation by calling:
+```csharp
+UDebugPanel.SetControllerSupport(true);
+```
+> [!NOTE]
+> Must be called before showing the panel, to take effect.
 
 ### Sections
 Debug actions are divided within different sections. These sections allow you to better organize your actions.
