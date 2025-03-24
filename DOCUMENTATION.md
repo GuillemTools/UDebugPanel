@@ -62,7 +62,7 @@ To quickly check if everything has been setup properly, you can go to DebugPanel
     ```csharp
     UDebugPanel.Toggle();
     ```
-### Automatic Toggle 
+### Automatic Toggle (needs the NewInputSystem on the project)
 We already provide some handy automatic input toggles for you.
 ```csharp
 UDebugPanel.SetupToggleInput();
