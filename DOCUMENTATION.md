@@ -22,11 +22,11 @@ This asset provides a suit of premade elements (buttons, int selector, float sel
 
 - **Adaptative**: The different widgets support and adapt to different screen aspect ratios, making it a good fit for both, desktop and mobile.
 
-    ![DebugPanel_Orientation](https://github.com/user-attachments/assets/d72b89f5-55b7-49de-aee9-847a20cfdb79)
+    ![DebugPanel_Orientation](https://github.com/user-attachments/assets/3684ad70-4b88-4e33-bb63-f7b615e38b8e)
 
 - **Smart**: You can automatically generate a debug options section using a class. Using reflection, changes that occur on the debug panel will affect the class instance.
 
-  ![AutomaticArt](https://github.com/Guillemsc/GDebugPanelGodot/assets/17142208/08886a94-e062-4532-a907-81c6482b2696)
+    ![DebugPanel_AutomaticWidgetCreation](https://github.com/user-attachments/assets/ed1694a9-351c-488a-bf0c-8ce711da2be9)
 
 - **Organization**: Organize your options using collapsable sections.
 
