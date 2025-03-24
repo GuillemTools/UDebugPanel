@@ -1,4 +1,4 @@
-![LogoWide](https://github.com/Guillemsc/GDebugPanelGodot/assets/17142208/a1b75c7b-9fcc-4131-ad5e-4034f4869270)
+![DebugPanel_GithubBanner](https://github.com/user-attachments/assets/ddbd1616-6055-4c13-b566-d1306ea06e00)
 
 Unity Debug Panel is a lightweight and versatile ingame debug panel for Unity with C#. 
 It can be incredible useful to be able to modify gameplay parameters while on the target device. 
