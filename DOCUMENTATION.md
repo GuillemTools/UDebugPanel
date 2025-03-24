@@ -86,6 +86,8 @@ UDebugPanel.SetControllerSupport(true);
 > [!NOTE]
 > Must be called before showing the panel, to take effect.
 
+![DebugPanel_ControllerInput](https://github.com/user-attachments/assets/bf87e1c7-ebe7-4dec-bfd6-c9b4035e21b3)
+
 ### Sections
 Debug actions are divided within different sections. These sections allow you to better organize your actions.
 You cannot create a debug action outside of a section.
