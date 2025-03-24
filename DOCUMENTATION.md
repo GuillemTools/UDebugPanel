@@ -64,7 +64,7 @@ To quickly check if everything has been setup properly, you can go to DebugPanel
     ```csharp
     UDebugPanel.Toggle();
     ```
-### Automatic Toggle (needs the NewInputSystem on the project)
+### Automatic Toggle
 We already provide some handy automatic input toggles for you.
 ```csharp
 UDebugPanel.SetupToggleInput();
@@ -75,6 +75,10 @@ By calling ```UDebugPanel.SetupToggleInput()```, you will automatically setup to
 - Triple finger tap on screen.
   
 You can modify this behaviour using the method parameters.
+
+### Controller navigation
+The panel has support for navigation with a controller or keyboard.
+You can enable controller navigation by calling ```UDebugPanel.SetControllerSupport(true)```.
 
 ### Sections
 Debug actions are divided within different sections. These sections allow you to better organize your actions.
