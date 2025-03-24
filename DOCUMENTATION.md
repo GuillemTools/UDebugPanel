@@ -30,11 +30,12 @@ This asset provides a suit of premade elements (buttons, int selector, float sel
 
 - **Organization**: Organize your options using collapsable sections.
 
-  ![Gif2](https://github.com/Guillemsc/GDebugPanelGodot/assets/17142208/a181cbeb-eb6a-4b8e-9de0-118f9b27d2bb)
+    ![DebugPanel_Organization](https://github.com/user-attachments/assets/73da65f3-5a1c-4f06-a9cb-41538a685f22)
 
 - **Fuzzy search**: Quicly find the options you were looking for with the search bar!
 
-  ![Gif](https://github.com/Guillemsc/GDebugPanelGodot/assets/17142208/5f47d808-69ab-4e5d-8aa9-18f0be2c2f87)
+    ![DebugPanel_FuzzySearch](https://github.com/user-attachments/assets/127754e0-5f44-463c-a746-ebb7d91c4dda)
+
 
 - **Lightweight**: While your game is running, the panel does not exist at all until you want to show it.
 When is hidden again, the panel is completely destroyed, so it does not affect to the preformance of your game.
@@ -166,62 +167,92 @@ This is the most important part of this asset, the debug actions (or widgets). O
     ```csharp
     section.AddInfo("Some info that never changes");
     ```
+    ![image](https://github.com/user-attachments/assets/d33c9613-883f-4861-bad6-ac6edea09f4c)
+
 - Dynamic Info: a getter for a string that it's updated every frame.
     ```csharp
     section.AddInfoDynamic(() => "Some info that can change");
     ```
+    ![image](https://github.com/user-attachments/assets/ab52b8d1-cee6-41dd-84ab-5c52b5d78e14)
+
 #### Buttons:
 - Button: a simple button with a name.
     ```csharp
     section.AddButton("Button name", () => Debug.Log("Pressed"));
     ```
+    ![image](https://github.com/user-attachments/assets/9fe5bafa-787a-4c15-a106-2d523f790d38)
+
 #### Toggle:
 - Toggle: a simple bool toggle with a name. Requests a setter and a getter for the value.
     ```csharp
     bool someBool = false;
     section.AddToggle("Toggle name", val => someBool = val, () => someBool);
     ```
+    ![image](https://github.com/user-attachments/assets/4370d97e-5c3e-40cf-8308-e30417f9abf8)
+
 #### Number selectors:
 - Int: an int selector with a name. Requests a setter and a getter for the value.
     ```csharp
     int someInt = 0;
     section.AddIntSelector("Int name", val => someInt = val, () => someInt);
     ```
+    ![image](https://github.com/user-attachments/assets/9093b457-2999-4f13-97b2-2e7e2995304b)
+
 - Float: a float selector with a name. Requests a setter and a getter for the value.
     ```csharp
     float someFloat = 0f;
     section.AddFloatSelector("Float name", val => someFloat = val, () => someFloat);
     ```
+    ![image](https://github.com/user-attachments/assets/95d9f397-e418-4013-a171-017300585dc0)
+
 - Long: a long selector with a name. Requests a setter and a getter for the value.
     ```csharp
     long someLong = 0;
     section.AddLongSelector("Long name", val => someLong = val, () => someLong);
     ```
+    ![image](https://github.com/user-attachments/assets/c0f7458f-497b-41d2-a282-32c8f0d4efcf)
+
 #### Advanced Buttons:
 - Button large info: a button that opens a popup which can shown information as text.
     ```csharp
     section.AddButtonLargeInfo("Button name", () => "This is some large info");
     ```
+    ![image](https://github.com/user-attachments/assets/f9ae1792-b109-428f-8880-a9c5a4d11d50)
+    ![image](https://github.com/user-attachments/assets/f4efba92-cdc4-4009-b859-08a51349f4a7)
+
 - Button string input: a button that opens a popup where you can set a string value.
     ```csharp
     string _stringInput = "Empty";
     section.AddButtonStringInput("Button name", () => _stringInput, v => _stringInput = v);
     ```
+    ![image](https://github.com/user-attachments/assets/ecf2c7cc-7086-445c-a4d4-8058f89972d7)
+    ![image](https://github.com/user-attachments/assets/1388186d-1332-43b8-9342-b88942960f64)
+
 - Button list selector: a button that opens a popup where you can select an item from a list of items.
     ```csharp
     List<string> _elementsList = new() {"Element1", "Element2", "Element3"};
     section.AddButtonListSelector("Button name", () => _elementsList, i => Debug.Log($"Selected {_elementsList[i]}"));
     ```
+    ![image](https://github.com/user-attachments/assets/dc5d4abc-19a4-425a-a967-f5713d4741fd)
+    ![image](https://github.com/user-attachments/assets/654d6ad0-7418-442a-a157-6409dd573dbb)
+
 - Button element list selector: a button that opens a popup where you can select an item from a list of items. The current selected value is stored internally and shown on the button text.
     ```csharp
     List<string> _elementsList = new() {"Element1", "Element2", "Element3"};
     section.AddButtonElementListSelector("Button name", () => _elementsList, i => Debug.Log($"Selected {_elementsList[i]}"));
     ```
+    ![image](https://github.com/user-attachments/assets/894fa82e-253b-49cb-aaf6-79b5696787da)
+    ![image](https://github.com/user-attachments/assets/e7fb5daf-1327-4fd4-b768-e56fd92a6303)
+
 - Button enum selector: a button that opens a popup where you can select the value of an enum. The current selected value is stored internally and shown on the button text.
     ```csharp
     TestEnum _elementEnumSelected = TestEnum.Element1;
     section.AddButtonEnumSelector("Button name",  i => _elementEnumSelected = i, () => _elementEnumSelected);
     ```
+    ![image](https://github.com/user-attachments/assets/00613047-8ac5-4c33-a0d9-879b8f67cb12)
+    ![image](https://github.com/user-attachments/assets/c64a9e0d-10a7-42de-a11e-bf038a1d08cd)
+
+
 #### Nested Containers:
 - Nested conatiner: a button that opens a popup which can have more debug actions.
     ```csharp
@@ -232,6 +263,9 @@ This is the most important part of this asset, the debug actions (or widgets). O
         s.AddButton("Another Button 3", () => Debug.Log("Button pressed"));
     });
     ```
+    ![image](https://github.com/user-attachments/assets/a61c82c3-3ca5-4c42-8d8d-55948e9fe93a)
+    ![image](https://github.com/user-attachments/assets/e192658c-a208-4146-aab9-0e13131266ec)
+
 > [!NOTE]
 > You can see debug actions functionality on the example DebugPanel.Widgets.
 
