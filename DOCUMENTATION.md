@@ -17,7 +17,7 @@ This asset provides a suit of premade elements (buttons, int selector, float sel
     UDebugPanel.Hide();
 
     IDebugActionsSection section = GDebugPanel.AddSection("Section name");
-    section.AddButton("Button name", () => GD.Print("Button click"));
+    section.AddButton("Button name", () => Debug.Log("Button click"));
     ```
 
 - **Adaptative**: The different widgets support and adapt to different screen aspect ratios, making it a good fit for both, desktop and mobile.
