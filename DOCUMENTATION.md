@@ -1,138 +1,261 @@
----
+![LogoWide](https://github.com/Guillemsc/GDebugPanelGodot/assets/17142208/a1b75c7b-9fcc-4131-ad5e-4034f4869270)
+
+Unity Debug Panel is a lightweight and versatile ingame debug panel for Unity with C#. 
+It can be incredible useful to be able to modify gameplay parameters while on the target device. 
+This asset simplifies the process of creating a panel with debut options in your Unity projects, allowing you to focus on what matters: gameplay.
+
+A debug panel, is a user interface that provides developers with tools and information to aid in debugging and profiling during the development of a software application or game.
+
+This asset provides a suit of premade elements (buttons, int selector, float selector, enum selection, etc), while allowing for the creation of new ones, with ease.
+
+![OptionsArt](https://github.com/Guillemsc/GDebugPanelGodot/assets/17142208/139736d6-ffb8-4f85-a962-14597b93723c)
+
+## 🍰 Features
+- **Simple API**: Unity Debug Panel provides an intuitive and easy-to-use API with C#.
+    ```csharp
+    UDebugPanel.Show();
+    UDebugPanel.Hide();
+
+    IDebugActionsSection section = GDebugPanel.AddSection("Section name");
+    section.AddButton("Button name", () => GD.Print("Button click"));
+    ```
+
+- **Adaptative**: The different widgets support and adapt to different screen aspect ratios, making it a good fit for both, desktop and mobile.
+
+  ![AdaptativeArt](https://github.com/Guillemsc/GDebugPanelGodot/assets/17142208/2e139eb8-d3a6-474d-bff2-a78ccec896bf)
+
+- **Smart**: You can automatically generate a debug options section using a class. Using reflection, changes that occur on the debug panel will affect the class instance.
+
+  ![AutomaticArt](https://github.com/Guillemsc/GDebugPanelGodot/assets/17142208/08886a94-e062-4532-a907-81c6482b2696)
+
+- **Organization**: Organize your options using collapsable sections.
+
+  ![Gif2](https://github.com/Guillemsc/GDebugPanelGodot/assets/17142208/a181cbeb-eb6a-4b8e-9de0-118f9b27d2bb)
+
+- **Fuzzy search**: Quicly find the options you were looking for with the search bar!
+
+  ![Gif](https://github.com/Guillemsc/GDebugPanelGodot/assets/17142208/5f47d808-69ab-4e5d-8aa9-18f0be2c2f87)
+
+- **Lightweight**: While your game is running, the panel does not exist at all until you want to show it.
+When is hidden again, the panel is completely destroyed, so it does not affect to the preformance of your game.
+
+## 📦 Installation
+Download and import from the Unity Asset Store. You can move the root folder anywhere you want in your project. 
+
+## ✔️ After installing
+To quickly check if everything has been setup properly, you can go to DebugPanel/Examples/Scenes/ and open any of the example scenes. When you run any of those scenes, a simple functionality example should play.
+
+## 📚 Getting started
+### Showing / Hiding
+- For **showing** the panel, you just need to call the `Show` method. The internal logic will take care of everything else.
+    ```csharp
+    UDebugPanel.Show();
+    ```
+- For **hiding** the panel, just call the `Hide` method.
+    ```csharp
+    UDebugPanel.Hide();
+    ```
+
+### Sections
+Debug actions are divided within different sections. These sections allow you to better organize your actions.
+You cannot create a debug action outside of a section.
+- **Creating** a new section is very simple, you just need to call `AddSection` and provide a section name: 
+    ```csharp
+    IDebugActionsSection section = UDebugPanel.AddSection("Section name");
+    ```
+- **Removing** a section is equally as simple. Just call `RemoveSection`, and provide the section you want to remove.
+    ```csharp
+    UDebugPanel.RemoveSection(section);
+    ```
+> [!NOTE]
+> You don't need to show the panel before creating actions/sections.
+
+> [!NOTE]
+> You can see this functionality on the example DebugPanel.Sections.
+
+### Automatic debug actions
+This asset has the ability of scanning for properties and methods in C# classes, to automatically create the adecuate widgets.
+
+One of such classes may look like this:
+
+```csharp
+public sealed class ExampleOptionsObject
+{
+    public enum ExampleEnum
+    {
+        Enum1,
+        Enum2,
+        Enum3,
+        SomeLongValueThat,
+    }
+    
+    public void ButtonExample() => Debug.Log("Button Action!");
+    public bool ToggleExample { get; set; }
+    public string DynamicInfoExample { get; set; } = "Dynamic Info";
+    public string InfoExample => "Info";
+    public int IntExample { get; set; }
+    public float FloatExample { get; set; }
+    public ExampleEnum EnumExample { get; set; }
+}
+```
+
+Then we add the class like this:
+
+```csharp
+UDebugPanel.AddSection("Section name", new ExampleOptionsObject());
+```
+
+And we will get debug options like this:
+
+![Reflection](https://github.com/Guillemsc/GDebugPanelGodot/assets/17142208/9b75af62-8de2-4295-ac66-ababfec26ed4)
+
+> [!NOTE]
+> You can see this functionality on the example DebugPanel.Reflection.
+
+ 
+### Manual debug actions
+This is the most important part of this asset, the debug actions (or widgets). Once you have a section, you add debug actions to it:
+
+#### Info:
+- Info: a static string that cannot be changed one submited.
+    ```csharp
+    section.AddInfo("Some info that never changes");
+    ```
+- Dynamic Info: a getter for a string that it's updated every frame.
+    ```csharp
+    section.AddInfoDynamic(() => "Some info that can change");
+    ```
+#### Buttons:
+- Button: a simple button with a name.
+    ```csharp
+    section.AddButton("Button name", () => Debug.Log("Pressed"));
+    ```
+#### Toggle:
+- Toggle: a simple bool toggle with a name. Requests a setter and a getter for the value.
+    ```csharp
+    bool someBool = false;
+    section.AddToggle("Toggle name", val => someBool = val, () => someBool);
+    ```
+#### Number selectors:
+- Int: an int selector with a name. Requests a setter and a getter for the value.
+    ```csharp
+    int someInt = 0;
+    section.AddIntSelector("Int name", val => someInt = val, () => someInt);
+    ```
+- Float: a float selector with a name. Requests a setter and a getter for the value.
+    ```csharp
+    float someFloat = 0f;
+    section.AddFloatSelector("Float name", val => someFloat = val, () => someFloat);
+    ```
+- Long: a long selector with a name. Requests a setter and a getter for the value.
+    ```csharp
+    long someLong = 0;
+    section.AddLongSelector("Long name", val => someLong = val, () => someLong);
+    ```
+#### Advanced Buttons:
+- Button large info: a button that opens a popup which can shown information as text.
+    ```csharp
+    section.AddButtonLargeInfo("Button name", () => "This is some large info");
+    ```
+- Button string input: a button that opens a popup where you can set a string value.
+    ```csharp
+    string _stringInput = "Empty";
+    section.AddButtonStringInput("Button name", () => _stringInput, v => _stringInput = v);
+    ```
+- Button list selector: a button that opens a popup where you can select an item from a list of items.
+    ```csharp
+    List<string> _elementsList = new() {"Element1", "Element2", "Element3"};
+    section.AddButtonListSelector("Button name", () => _elementsList, i => Debug.Log($"Selected {_elementsList[i]}"));
+    ```
+- Button element list selector: a button that opens a popup where you can select an item from a list of items. The current selected value is stored internally and shown on the button text.
+    ```csharp
+    List<string> _elementsList = new() {"Element1", "Element2", "Element3"};
+    section.AddButtonElementListSelector("Button name", () => _elementsList, i => Debug.Log($"Selected {_elementsList[i]}"));
+    ```
+- Button enum selector: a button that opens a popup where you can select the value of an enum. The current selected value is stored internally and shown on the button text.
+    ```csharp
+    TestEnum _elementEnumSelected = TestEnum.Element1;
+    section.AddButtonEnumSelector("Button name",  i => _elementEnumSelected = i, () => _elementEnumSelected);
+    ```
+> [!NOTE]
+> You can see this functionality on the example DebugPanel.Widgets.
+
+### Creating more debug options
+Some times, your game may have specific needs that cannot be properly met by the default provided widgets. That's why you can create your own.
+We are going to use the Info action as an example.
+
+1. The first thing you need to do is create a new class and inherit from `DebugAction`. This interface will force you to implement `DebugActionWidget InitWidget(RectTransform popupsParent, DebugActionWidget viewInstance)` method, which is responsable for setting  the values from the action, to the widget Ui. We will not implement it for now.
+We should first set the information that the action will hold. In this case it's a string for the info.
+
+    ```csharp
+    public sealed class InfoDebugAction : DebugAction
+    {
+        readonly string _info
+    
+        public InfoDebugAction(string info)
+        {
+            _info = info;
+            ActionName = info; // ActionName is used for search box functionality
+        }
+
+        public override void InitWidget(RectTransform popupsParent, DebugActionWidget viewInstance)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    ```
+
+3. Next, we need a new `DebugActionWidget`, which will be the actual GameObject placed on the Ui. Since the widget is made of a label, we will add a reference to it. We will  also add an Init method to set the label value.
+
+    ```csharp
+    public sealed class InfoDebugActionWidget : DebugActionWidget
+    {
+        public TextMeshProUGUI Label;
+
+        public void Init(string info)
+        {
+            Label!.text = info;
+        }
+    }
+    ```
 
 
----
+4. Going back to the `InfoDebugAction` class, we need to implement `InitWidget`. The widget itself will be automatically instantiated internally. We need to init it here.
 
-<h1 id="unity-debug-panel-documentation">Unity Debug Panel Documentation</h1>
-<p>Unity Debug Panel is a lightweight and versatile ingame debug panel for Unity. It can be incredibly useful to be able to modify gameplay parameters while on the target device. This asset simplifies the process of creating a debug panel with options in your Unity projects, allowing you to focus on what matters: gameplay.</p>
-<p>A debug panel, is a user interface that provides developers with tools and information to aid in debugging and profiling during the development of a software application or game.</p>
-<p>This asset provides a suit of premade elements (buttons, toggles, number selectors, enum selection, list selection, etc.), while allowing for the creation of new ones, with ease.</p>
-<h1 id="🍰-features">🍰 Features</h1>
-<p><strong>- Simple API</strong>: Unity Debug Panel provides an intuitive and easy-to-use API.</p>
-<pre class=" language-csharp"><code class="prism  language-csharp">GDebugPanel<span class="token punctuation">.</span><span class="token function">Show</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-GDebugPanel<span class="token punctuation">.</span><span class="token function">Hide</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    ```csharp
+    public sealed class IntDebugAction : IDebugAction
+    {    
+        readonly string _info
+    
+        public InfoDebugAction(string info)
+        {
+            _info = info;
+            ActionName = info;
+        }
+    
+        public override void InitWidget(RectTransform popupsParent, DebugActionWidget viewInstance)
+        {
+            InfoDebugActionWidget widget = (InfoDebugActionWidget)viewInstance;
+            widget.Init(ActionName);
+        }
+    }
+    ```
+5. For being able to use this new action on a section, just add an extension method that does this:
 
-IDebugActionsSection section <span class="token operator">=</span> GDebugPanel<span class="token punctuation">.</span><span class="token function">AddSection</span><span class="token punctuation">(</span><span class="token string">"Section name"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-section<span class="token punctuation">.</span><span class="token function">AddButton</span><span class="token punctuation">(</span><span class="token string">"Button name"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> Debug<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token string">"Click"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
-<p><strong>- Adaptative</strong>: The different widgets support and adapt to different screen aspect ratios, making it a good fit for both, desktop and mobile.<br>
-<strong>- Smart</strong>: You can automatically generate a debug options section using a class. Using reflection, changes that occur on the debug panel will affect the class instance.<br>
-<strong>- Organization</strong>: Organize your options using sections.<br>
-<strong>- Fuzzy search</strong>: Quickly find the options you were looking for with the search bar!<br>
-<strong>- Lightweight</strong>: While your game is running, the panel does not exist at all until you want to show it. When is hidden again, the panel is completely destroyed, so it does not impact the performance of your game.</p>
-<h1 id="📚-getting-started">📚 Getting started</h1>
-<h3 id="showing--hiding">Showing / Hiding</h3>
-<ul>
-<li>For  <strong>showing</strong>  the panel, you just need to call the  <code>Show</code>  method:<pre class=" language-csharp"><code class="prism  language-csharp">GDebugPanel<span class="token punctuation">.</span><span class="token function">Show</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
-</li>
-<li>For  <strong>hiding</strong>  the panel, just call the  <code>Hide</code>  method:<pre class=" language-csharp"><code class="prism  language-csharp">GDebugPanel<span class="token punctuation">.</span><span class="token function">Hide</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
-</li>
-<li>You can also just <strong>toggle</strong> automatically:<pre class=" language-csharp"><code class="prism  language-csharp">GDebugPanel<span class="token punctuation">.</span><span class="token function">Toggle</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
-</li>
-</ul>
-<h2 id="switch-to-another-file">Switch to another file</h2>
-<p>All your files and folders are presented as a tree in the file explorer. You can switch from one to another by clicking a file in the tree.</p>
-<h2 id="rename-a-file">Rename a file</h2>
-<p>You can rename the current file by clicking the file name in the navigation bar or by clicking the <strong>Rename</strong> button in the file explorer.</p>
-<h2 id="delete-a-file">Delete a file</h2>
-<p>You can delete the current file by clicking the <strong>Remove</strong> button in the file explorer. The file will be moved into the <strong>Trash</strong> folder and automatically deleted after 7 days of inactivity.</p>
-<h2 id="export-a-file">Export a file</h2>
-<p>You can export the current file by clicking <strong>Export to disk</strong> in the menu. You can choose to export the file as plain Markdown, as HTML using a Handlebars template or as a PDF.</p>
-<h1 id="synchronization">Synchronization</h1>
-<p>Synchronization is one of the biggest features of StackEdit. It enables you to synchronize any file in your workspace with other files stored in your <strong>Google Drive</strong>, your <strong>Dropbox</strong> and your <strong>GitHub</strong> accounts. This allows you to keep writing on other devices, collaborate with people you share the file with, integrate easily into your workflow… The synchronization mechanism takes place every minute in the background, downloading, merging, and uploading file modifications.</p>
-<p>There are two types of synchronization and they can complement each other:</p>
-<ul>
-<li>
-<p>The workspace synchronization will sync all your files, folders and settings automatically. This will allow you to fetch your workspace on any other device.</p>
-<blockquote>
-<p>To start syncing your workspace, just sign in with Google in the menu.</p>
-</blockquote>
-</li>
-<li>
-<p>The file synchronization will keep one file of the workspace synced with one or multiple files in <strong>Google Drive</strong>, <strong>Dropbox</strong> or <strong>GitHub</strong>.</p>
-<blockquote>
-<p>Before starting to sync files, you must link an account in the <strong>Synchronize</strong> sub-menu.</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="open-a-file">Open a file</h2>
-<p>You can open a file from <strong>Google Drive</strong>, <strong>Dropbox</strong> or <strong>GitHub</strong> by opening the <strong>Synchronize</strong> sub-menu and clicking <strong>Open from</strong>. Once opened in the workspace, any modification in the file will be automatically synced.</p>
-<h2 id="save-a-file">Save a file</h2>
-<p>You can save any file of the workspace to <strong>Google Drive</strong>, <strong>Dropbox</strong> or <strong>GitHub</strong> by opening the <strong>Synchronize</strong> sub-menu and clicking <strong>Save on</strong>. Even if a file in the workspace is already synced, you can save it to another location. StackEdit can sync one file with multiple locations and accounts.</p>
-<h2 id="synchronize-a-file">Synchronize a file</h2>
-<p>Once your file is linked to a synchronized location, StackEdit will periodically synchronize it by downloading/uploading any modification. A merge will be performed if necessary and conflicts will be resolved.</p>
-<p>If you just have modified your file and you want to force syncing, click the <strong>Synchronize now</strong> button in the navigation bar.</p>
-<blockquote>
-<p><strong>Note:</strong> The <strong>Synchronize now</strong> button is disabled if you have no file to synchronize.</p>
-</blockquote>
-<h2 id="manage-file-synchronization">Manage file synchronization</h2>
-<p>Since one file can be synced with multiple locations, you can list and manage synchronized locations by clicking <strong>File synchronization</strong> in the <strong>Synchronize</strong> sub-menu. This allows you to list and remove synchronized locations that are linked to your file.</p>
-<h1 id="publication">Publication</h1>
-<p>Publishing in StackEdit makes it simple for you to publish online your files. Once you’re happy with a file, you can publish it to different hosting platforms like <strong>Blogger</strong>, <strong>Dropbox</strong>, <strong>Gist</strong>, <strong>GitHub</strong>, <strong>Google Drive</strong>, <strong>WordPress</strong> and <strong>Zendesk</strong>. With <a href="http://handlebarsjs.com/">Handlebars templates</a>, you have full control over what you export.</p>
-<blockquote>
-<p>Before starting to publish, you must link an account in the <strong>Publish</strong> sub-menu.</p>
-</blockquote>
-<h2 id="publish-a-file">Publish a File</h2>
-<p>You can publish your file by opening the <strong>Publish</strong> sub-menu and by clicking <strong>Publish to</strong>. For some locations, you can choose between the following formats:</p>
-<ul>
-<li>Markdown: publish the Markdown text on a website that can interpret it (<strong>GitHub</strong> for instance),</li>
-<li>HTML: publish the file converted to HTML via a Handlebars template (on a blog for example).</li>
-</ul>
-<h2 id="update-a-publication">Update a publication</h2>
-<p>After publishing, StackEdit keeps your file linked to that publication which makes it easy for you to re-publish it. Once you have modified your file and you want to update your publication, click on the <strong>Publish now</strong> button in the navigation bar.</p>
-<blockquote>
-<p><strong>Note:</strong> The <strong>Publish now</strong> button is disabled if your file has not been published yet.</p>
-</blockquote>
-<h2 id="manage-file-publication">Manage file publication</h2>
-<p>Since one file can be published to multiple locations, you can list and manage publish locations by clicking <strong>File publication</strong> in the <strong>Publish</strong> sub-menu. This allows you to list and remove publication locations that are linked to your file.</p>
-<h1 id="markdown-extensions">Markdown extensions</h1>
-<p>StackEdit extends the standard Markdown syntax by adding extra <strong>Markdown extensions</strong>, providing you with some nice features.</p>
-<blockquote>
-<p><strong>ProTip:</strong> You can disable any <strong>Markdown extension</strong> in the <strong>File properties</strong> dialog.</p>
-</blockquote>
-<h2 id="smartypants">SmartyPants</h2>
-<p>SmartyPants converts ASCII punctuation characters into “smart” typographic punctuation HTML entities. For example:</p>
+    ```csharp
+    public static IDebugAction AddInfo(this IDebugActionsSection section, string info)
+    {
+        InfoDebugAction debugAction = new InfoDebugAction(info);
+        section.Add(debugAction);
+        return debugAction;
+    }
+    ```
 
-<table>
-<thead>
-<tr>
-<th></th>
-<th>ASCII</th>
-<th>HTML</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Single backticks</td>
-<td><code>'Isn't this fun?'</code></td>
-<td>‘Isn’t this fun?’</td>
-</tr>
-<tr>
-<td>Quotes</td>
-<td><code>"Isn't this fun?"</code></td>
-<td>“Isn’t this fun?”</td>
-</tr>
-<tr>
-<td>Dashes</td>
-<td><code>-- is en-dash, --- is em-dash</code></td>
-<td>– is en-dash, — is em-dash</td>
-</tr>
-</tbody>
-</table><h2 id="katex">KaTeX</h2>
-<p>You can render LaTeX mathematical expressions using <a href="https://khan.github.io/KaTeX/">KaTeX</a>:</p>
-<p>The <em>Gamma function</em> satisfying <span class="katex--inline"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Γ</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo>=</mo><mo stretchy="false">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mo stretchy="false">!</mo><mspace width="1em"></mspace><mi mathvariant="normal">∀</mi><mi>n</mi><mo>∈</mo><mi mathvariant="double-struck">N</mi></mrow><annotation encoding="application/x-tex">\Gamma(n) = (n-1)!\quad\forall n\in\mathbb N</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span class="mord">Γ</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span><span class="mspace" style="margin-right: 0.277778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right: 0.277778em;"></span></span><span class="base"><span class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right: 0.222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right: 0.222222em;"></span></span><span class="base"><span class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span class="mord">1</span><span class="mclose">)!</span><span class="mspace" style="margin-right: 1em;"></span><span class="mord">∀</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right: 0.277778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right: 0.277778em;"></span></span><span class="base"><span class="strut" style="height: 0.68889em; vertical-align: 0em;"></span><span class="mord mathbb">N</span></span></span></span></span> is via the Euler integral</p>
-<p><span class="katex--display"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi mathvariant="normal">Γ</mi><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo><mo>=</mo><msubsup><mo>∫</mo><mn>0</mn><mi mathvariant="normal">∞</mi></msubsup><msup><mi>t</mi><mrow><mi>z</mi><mo>−</mo><mn>1</mn></mrow></msup><msup><mi>e</mi><mrow><mo>−</mo><mi>t</mi></mrow></msup><mi>d</mi><mi>t</mi> <mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">
-\Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height: 1em; vertical-align: -0.25em;"></span><span class="mord">Γ</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right: 0.04398em;">z</span><span class="mclose">)</span><span class="mspace" style="margin-right: 0.277778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right: 0.277778em;"></span></span><span class="base"><span class="strut" style="height: 2.32624em; vertical-align: -0.91195em;"></span><span class="mop"><span class="mop op-symbol large-op" style="margin-right: 0.44445em; position: relative; top: -0.001125em;">∫</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height: 1.41429em;"><span class="" style="top: -1.78805em; margin-left: -0.44445em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span><span class="" style="top: -3.8129em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">∞</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height: 0.91195em;"><span class=""></span></span></span></span></span></span><span class="mspace" style="margin-right: 0.166667em;"></span><span class="mord"><span class="mord mathnormal">t</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height: 0.864108em;"><span class="" style="top: -3.113em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right: 0.04398em;">z</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal">e</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height: 0.843556em;"><span class="" style="top: -3.113em; margin-right: 0.05em;"><span class="pstrut" style="height: 2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mathnormal mtight">t</span></span></span></span></span></span></span></span></span><span class="mord mathnormal">d</span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right: 0.166667em;"></span><span class="mord">.</span></span></span></span></span></span></p>
-<blockquote>
-<p>You can find more information about <strong>LaTeX</strong> mathematical expressions <a href="http://meta.math.stackexchange.com/questions/5020/mathjax-basic-tutorial-and-quick-reference">here</a>.</p>
-</blockquote>
-<h2 id="uml-diagrams">UML diagrams</h2>
-<p>You can render UML diagrams using <a href="https://mermaidjs.github.io/">Mermaid</a>. For example, this will produce a sequence diagram:</p>
-<pre class=" language-mermaid"><svg id="mermaid-svg-SwC7MAiWtcbnPCEI" width="100%" xmlns="http://www.w3.org/2000/svg" height="543" style="max-width: 814px;" viewBox="-50 -10 814 543"><style>#mermaid-svg-SwC7MAiWtcbnPCEI{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;fill:#000000;}#mermaid-svg-SwC7MAiWtcbnPCEI .error-icon{fill:#552222;}#mermaid-svg-SwC7MAiWtcbnPCEI .error-text{fill:#552222;stroke:#552222;}#mermaid-svg-SwC7MAiWtcbnPCEI .edge-thickness-normal{stroke-width:2px;}#mermaid-svg-SwC7MAiWtcbnPCEI .edge-thickness-thick{stroke-width:3.5px;}#mermaid-svg-SwC7MAiWtcbnPCEI .edge-pattern-solid{stroke-dasharray:0;}#mermaid-svg-SwC7MAiWtcbnPCEI .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-svg-SwC7MAiWtcbnPCEI .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-svg-SwC7MAiWtcbnPCEI .marker{fill:#666;stroke:#666;}#mermaid-svg-SwC7MAiWtcbnPCEI .marker.cross{stroke:#666;}#mermaid-svg-SwC7MAiWtcbnPCEI svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;}#mermaid-svg-SwC7MAiWtcbnPCEI .actor{stroke:hsl(0,0%,83%);fill:#eee;}#mermaid-svg-SwC7MAiWtcbnPCEI text.actor > tspan{fill:#333;stroke:none;}#mermaid-svg-SwC7MAiWtcbnPCEI .actor-line{stroke:#666;}#mermaid-svg-SwC7MAiWtcbnPCEI .messageLine0{stroke-width:1.5;stroke-dasharray:none;stroke:#333;}#mermaid-svg-SwC7MAiWtcbnPCEI .messageLine1{stroke-width:1.5;stroke-dasharray:2,2;stroke:#333;}#mermaid-svg-SwC7MAiWtcbnPCEI #arrowhead path{fill:#333;stroke:#333;}#mermaid-svg-SwC7MAiWtcbnPCEI .sequenceNumber{fill:white;}#mermaid-svg-SwC7MAiWtcbnPCEI #sequencenumber{fill:#333;}#mermaid-svg-SwC7MAiWtcbnPCEI #crosshead path{fill:#333;stroke:#333;}#mermaid-svg-SwC7MAiWtcbnPCEI .messageText{fill:#333;stroke:#333;}#mermaid-svg-SwC7MAiWtcbnPCEI .labelBox{stroke:hsl(0,0%,83%);fill:#eee;}#mermaid-svg-SwC7MAiWtcbnPCEI .labelText,#mermaid-svg-SwC7MAiWtcbnPCEI .labelText > tspan{fill:#333;stroke:none;}#mermaid-svg-SwC7MAiWtcbnPCEI .loopText,#mermaid-svg-SwC7MAiWtcbnPCEI .loopText > tspan{fill:#333;stroke:none;}#mermaid-svg-SwC7MAiWtcbnPCEI .loopLine{stroke-width:2px;stroke-dasharray:2,2;stroke:hsl(0,0%,83%);fill:hsl(0,0%,83%);}#mermaid-svg-SwC7MAiWtcbnPCEI .note{stroke:hsl(60,100%,23.3333333333%);fill:#ffa;}#mermaid-svg-SwC7MAiWtcbnPCEI .noteText,#mermaid-svg-SwC7MAiWtcbnPCEI .noteText > tspan{fill:#333;stroke:none;}#mermaid-svg-SwC7MAiWtcbnPCEI .activation0{fill:#f4f4f4;stroke:#666;}#mermaid-svg-SwC7MAiWtcbnPCEI .activation1{fill:#f4f4f4;stroke:#666;}#mermaid-svg-SwC7MAiWtcbnPCEI .activation2{fill:#f4f4f4;stroke:#666;}#mermaid-svg-SwC7MAiWtcbnPCEI:root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}#mermaid-svg-SwC7MAiWtcbnPCEI sequence{fill:apa;}</style><g></g><g><line id="actor36" x1="75" y1="5" x2="75" y2="532" class="actor-line" stroke-width="0.5px" stroke="#999"></line><rect x="0" y="0" fill="#eaeaea" stroke="#666" width="150" height="65" rx="3" ry="3" class="actor"></rect><text x="75" y="32.5" dominant-baseline="central" alignment-baseline="central" class="actor" style="text-anchor: middle; font-size: 14px; font-weight: 400; font-family: Open-Sans, &quot;sans-serif&quot;;"><tspan x="75" dy="0">Alice</tspan></text></g><g><line id="actor37" x1="318" y1="5" x2="318" y2="532" class="actor-line" stroke-width="0.5px" stroke="#999"></line><rect x="243" y="0" fill="#eaeaea" stroke="#666" width="150" height="65" rx="3" ry="3" class="actor"></rect><text x="318" y="32.5" dominant-baseline="central" alignment-baseline="central" class="actor" style="text-anchor: middle; font-size: 14px; font-weight: 400; font-family: Open-Sans, &quot;sans-serif&quot;;"><tspan x="318" dy="0">Bob</tspan></text></g><g><line id="actor38" x1="539" y1="5" x2="539" y2="532" class="actor-line" stroke-width="0.5px" stroke="#999"></line><rect x="464" y="0" fill="#eaeaea" stroke="#666" width="150" height="65" rx="3" ry="3" class="actor"></rect><text x="539" y="32.5" dominant-baseline="central" alignment-baseline="central" class="actor" style="text-anchor: middle; font-size: 14px; font-weight: 400; font-family: Open-Sans, &quot;sans-serif&quot;;"><tspan x="539" dy="0">John</tspan></text></g><defs><marker id="arrowhead" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z"></path></marker></defs><defs><marker id="crosshead" markerWidth="15" markerHeight="8" orient="auto" refX="16" refY="4"><path fill="black" stroke="#000000" stroke-width="1px" d="M 9,2 V 6 L16,4 Z" style="stroke-dasharray: 0, 0;"></path><path fill="none" stroke="#000000" stroke-width="1px" d="M 0,1 L 6,7 M 6,1 L 0,7" style="stroke-dasharray: 0, 0;"></path></marker></defs><defs><marker id="filled-head" refX="18" refY="7" markerWidth="20" markerHeight="28" orient="auto"><path d="M 18,7 L9,13 L14,7 L9,1 Z"></path></marker></defs><defs><marker id="sequencenumber" refX="15" refY="15" markerWidth="60" markerHeight="40" orient="auto"><circle cx="15" cy="15" r="6"></circle></marker></defs><text x="197" y="80" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" class="messageText" dy="1em" style="font-family: &quot;trebuchet ms&quot;, verdana, arial, sans-serif; font-size: 16px; font-weight: 400;">Hello Bob, how are you?</text><line x1="75" y1="113" x2="318" y2="113" class="messageLine0" stroke-width="2" stroke="none" marker-end="url(#arrowhead)" style="fill: none;"></line><text x="429" y="128" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" class="messageText" dy="1em" style="font-family: &quot;trebuchet ms&quot;, verdana, arial, sans-serif; font-size: 16px; font-weight: 400;">How about you John?</text><line x1="318" y1="161" x2="539" y2="161" class="messageLine1" stroke-width="2" stroke="none" marker-end="url(#arrowhead)" style="stroke-dasharray: 3, 3; fill: none;"></line><text x="197" y="176" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" class="messageText" dy="1em" style="font-family: &quot;trebuchet ms&quot;, verdana, arial, sans-serif; font-size: 16px; font-weight: 400;">I am good thanks!</text><line x1="318" y1="209" x2="75" y2="209" class="messageLine1" stroke-width="2" stroke="none" marker-end="url(#crosshead)" style="stroke-dasharray: 3, 3; fill: none;"></line><text x="429" y="224" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" class="messageText" dy="1em" style="font-family: &quot;trebuchet ms&quot;, verdana, arial, sans-serif; font-size: 16px; font-weight: 400;">I am good thanks!</text><line x1="318" y1="257" x2="539" y2="257" class="messageLine0" stroke-width="2" stroke="none" marker-end="url(#crosshead)" style="fill: none;"></line><g><rect x="564" y="267" fill="#EDF2AE" stroke="#666" width="150" height="84" rx="0" ry="0" class="note"></rect><text x="639" y="272" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" class="noteText" dy="1em" style="font-family: &quot;trebuchet ms&quot;, verdana, arial, sans-serif; font-size: 14px; font-weight: 400;"><tspan x="639">Bob thinks a long</tspan></text><text x="639" y="288" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" class="noteText" dy="1em" style="font-family: &quot;trebuchet ms&quot;, verdana, arial, sans-serif; font-size: 14px; font-weight: 400;"><tspan x="639">long time, so long</tspan></text><text x="639" y="304" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" class="noteText" dy="1em" style="font-family: &quot;trebuchet ms&quot;, verdana, arial, sans-serif; font-size: 14px; font-weight: 400;"><tspan x="639">that the text does</tspan></text><text x="639" y="320" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" class="noteText" dy="1em" style="font-family: &quot;trebuchet ms&quot;, verdana, arial, sans-serif; font-size: 14px; font-weight: 400;"><tspan x="639">not fit on a row.</tspan></text></g><text x="197" y="366" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" class="messageText" dy="1em" style="font-family: &quot;trebuchet ms&quot;, verdana, arial, sans-serif; font-size: 16px; font-weight: 400;">Checking with John...</text><line x1="318" y1="399" x2="75" y2="399" class="messageLine1" stroke-width="2" stroke="none" style="stroke-dasharray: 3, 3; fill: none;"></line><text x="307" y="414" text-anchor="middle" dominant-baseline="middle" alignment-baseline="middle" class="messageText" dy="1em" style="font-family: &quot;trebuchet ms&quot;, verdana, arial, sans-serif; font-size: 16px; font-weight: 400;">Yes... John, how are you?</text><line x1="75" y1="447" x2="539" y2="447" class="messageLine0" stroke-width="2" stroke="none" style="fill: none;"></line><g><rect x="0" y="467" fill="#eaeaea" stroke="#666" width="150" height="65" rx="3" ry="3" class="actor"></rect><text x="75" y="499.5" dominant-baseline="central" alignment-baseline="central" class="actor" style="text-anchor: middle; font-size: 14px; font-weight: 400; font-family: Open-Sans, &quot;sans-serif&quot;;"><tspan x="75" dy="0">Alice</tspan></text></g><g><rect x="243" y="467" fill="#eaeaea" stroke="#666" width="150" height="65" rx="3" ry="3" class="actor"></rect><text x="318" y="499.5" dominant-baseline="central" alignment-baseline="central" class="actor" style="text-anchor: middle; font-size: 14px; font-weight: 400; font-family: Open-Sans, &quot;sans-serif&quot;;"><tspan x="318" dy="0">Bob</tspan></text></g><g><rect x="464" y="467" fill="#eaeaea" stroke="#666" width="150" height="65" rx="3" ry="3" class="actor"></rect><text x="539" y="499.5" dominant-baseline="central" alignment-baseline="central" class="actor" style="text-anchor: middle; font-size: 14px; font-weight: 400; font-family: Open-Sans, &quot;sans-serif&quot;;"><tspan x="539" dy="0">John</tspan></text></g></svg></pre>
-<p>And this will produce a flow chart:</p>
-<pre class=" language-mermaid"><svg id="mermaid-svg-P6zka4ka4Yy5uAUv" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="174.4375" style="max-width: 502.75px;" viewBox="0 0 502.75 174.4375"><style>#mermaid-svg-P6zka4ka4Yy5uAUv{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;fill:#000000;}#mermaid-svg-P6zka4ka4Yy5uAUv .error-icon{fill:#552222;}#mermaid-svg-P6zka4ka4Yy5uAUv .error-text{fill:#552222;stroke:#552222;}#mermaid-svg-P6zka4ka4Yy5uAUv .edge-thickness-normal{stroke-width:2px;}#mermaid-svg-P6zka4ka4Yy5uAUv .edge-thickness-thick{stroke-width:3.5px;}#mermaid-svg-P6zka4ka4Yy5uAUv .edge-pattern-solid{stroke-dasharray:0;}#mermaid-svg-P6zka4ka4Yy5uAUv .edge-pattern-dashed{stroke-dasharray:3;}#mermaid-svg-P6zka4ka4Yy5uAUv .edge-pattern-dotted{stroke-dasharray:2;}#mermaid-svg-P6zka4ka4Yy5uAUv .marker{fill:#666;stroke:#666;}#mermaid-svg-P6zka4ka4Yy5uAUv .marker.cross{stroke:#666;}#mermaid-svg-P6zka4ka4Yy5uAUv svg{font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:16px;}#mermaid-svg-P6zka4ka4Yy5uAUv .label{font-family:"trebuchet ms",verdana,arial,sans-serif;color:#000000;}#mermaid-svg-P6zka4ka4Yy5uAUv .cluster-label text{fill:#333;}#mermaid-svg-P6zka4ka4Yy5uAUv .cluster-label span{color:#333;}#mermaid-svg-P6zka4ka4Yy5uAUv .label text,#mermaid-svg-P6zka4ka4Yy5uAUv span{fill:#000000;color:#000000;}#mermaid-svg-P6zka4ka4Yy5uAUv .node rect,#mermaid-svg-P6zka4ka4Yy5uAUv .node circle,#mermaid-svg-P6zka4ka4Yy5uAUv .node ellipse,#mermaid-svg-P6zka4ka4Yy5uAUv .node polygon,#mermaid-svg-P6zka4ka4Yy5uAUv .node path{fill:#eee;stroke:#999;stroke-width:1px;}#mermaid-svg-P6zka4ka4Yy5uAUv .node .label{text-align:center;}#mermaid-svg-P6zka4ka4Yy5uAUv .node.clickable{cursor:pointer;}#mermaid-svg-P6zka4ka4Yy5uAUv .arrowheadPath{fill:#333333;}#mermaid-svg-P6zka4ka4Yy5uAUv .edgePath .path{stroke:#666;stroke-width:1.5px;}#mermaid-svg-P6zka4ka4Yy5uAUv .flowchart-link{stroke:#666;fill:none;}#mermaid-svg-P6zka4ka4Yy5uAUv .edgeLabel{background-color:white;text-align:center;}#mermaid-svg-P6zka4ka4Yy5uAUv .edgeLabel rect{opacity:0.5;background-color:white;fill:white;}#mermaid-svg-P6zka4ka4Yy5uAUv .cluster rect{fill:hsl(210,66.6666666667%,95%);stroke:#26a;stroke-width:1px;}#mermaid-svg-P6zka4ka4Yy5uAUv .cluster text{fill:#333;}#mermaid-svg-P6zka4ka4Yy5uAUv .cluster span{color:#333;}#mermaid-svg-P6zka4ka4Yy5uAUv div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:"trebuchet ms",verdana,arial,sans-serif;font-size:12px;background:hsl(-160,0%,93.3333333333%);border:1px solid #26a;border-radius:2px;pointer-events:none;z-index:100;}#mermaid-svg-P6zka4ka4Yy5uAUv:root{--mermaid-font-family:"trebuchet ms",verdana,arial,sans-serif;}#mermaid-svg-P6zka4ka4Yy5uAUv flowchart{fill:apa;}</style><g><g class="output"><g class="clusters"></g><g class="edgePaths"><g class="edgePath LS-A LE-B" style="opacity: 1;" id="L-A-B"><path class="path" d="M109.66244612068965,67.609375L170.0546875,38.859375L246.125,38.859375" marker-end="url(https://stackedit.io/app#arrowhead13)" style="fill:none"></path><defs><marker id="arrowhead13" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker></defs></g><g class="edgePath LS-A LE-C" style="opacity: 1;" id="L-A-C"><path class="path" d="M109.66244612068965,114.328125L170.0546875,143.078125L226.921875,143.078125" marker-end="url(https://stackedit.io/app#arrowhead14)" style="fill:none"></path><defs><marker id="arrowhead14" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker></defs></g><g class="edgePath LS-B LE-D" style="opacity: 1;" id="L-B-D"><path class="path" d="M307.84375,38.859375L352.046875,38.859375L400.1027516807447,68.9128733192553" marker-end="url(https://stackedit.io/app#arrowhead15)" style="fill:none"></path><defs><marker id="arrowhead15" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker></defs></g><g class="edgePath LS-C LE-D" style="opacity: 1;" id="L-C-D"><path class="path" d="M327.046875,143.078125L352.046875,143.078125L400.1027516807447,114.0246266807447" marker-end="url(https://stackedit.io/app#arrowhead16)" style="fill:none"></path><defs><marker id="arrowhead16" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" markerWidth="8" markerHeight="6" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowheadPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker></defs></g></g><g class="edgeLabels"><g class="edgeLabel" style="opacity: 1;" transform="translate(170.0546875,38.859375)"><g transform="translate(-31.8671875,-13.359375)" class="label"><rect rx="0" ry="0" width="63.734375" height="26.71875"></rect><foreignObject width="63.734375" height="26.71875"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><span id="L-L-A-B" class="edgeLabel L-LS-A' L-LE-B">Link text</span></div></foreignObject></g></g><g class="edgeLabel" style="opacity: 1;" transform=""><g transform="translate(0,0)" class="label"><rect rx="0" ry="0" width="0" height="0"></rect><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><span id="L-L-A-C" class="edgeLabel L-LS-A' L-LE-C"></span></div></foreignObject></g></g><g class="edgeLabel" style="opacity: 1;" transform=""><g transform="translate(0,0)" class="label"><rect rx="0" ry="0" width="0" height="0"></rect><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><span id="L-L-B-D" class="edgeLabel L-LS-B' L-LE-D"></span></div></foreignObject></g></g><g class="edgeLabel" style="opacity: 1;" transform=""><g transform="translate(0,0)" class="label"><rect rx="0" ry="0" width="0" height="0"></rect><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;"><span id="L-L-C-D" class="edgeLabel L-LS-C' L-LE-D"></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default" style="opacity: 1;" id="flowchart-A-56" transform="translate(60.59375,90.96875)"><rect rx="0" ry="0" x="-52.59375" y="-23.359375" width="105.1875" height="46.71875" class="label-container"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-42.59375,-13.359375)"><foreignObject width="85.1875" height="26.71875"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;">Square Rect</div></foreignObject></g></g></g><g class="node default" style="opacity: 1;" id="flowchart-B-57" transform="translate(276.984375,38.859375)"><circle x="-30.859375" y="-23.359375" r="30.859375" class="label-container"></circle><g class="label" transform="translate(0,0)"><g transform="translate(-20.859375,-13.359375)"><foreignObject width="41.71875" height="26.71875"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;">Circle</div></foreignObject></g></g></g><g class="node default" style="opacity: 1;" id="flowchart-C-59" transform="translate(276.984375,143.078125)"><rect rx="5" ry="5" x="-50.0625" y="-23.359375" width="100.125" height="46.71875" class="label-container"></rect><g class="label" transform="translate(0,0)"><g transform="translate(-40.0625,-13.359375)"><foreignObject width="80.125" height="26.71875"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;">Round Rect</div></foreignObject></g></g></g><g class="node default" style="opacity: 1;" id="flowchart-D-61" transform="translate(435.8984375,90.96875)"><polygon points="58.8515625,0 117.703125,-58.8515625 58.8515625,-117.703125 0,-58.8515625" transform="translate(-58.8515625,58.8515625)" class="label-container"></polygon><g class="label" transform="translate(0,0)"><g transform="translate(-32.03125,-13.359375)"><foreignObject width="64.0625" height="26.71875"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; white-space: nowrap;">Rhombus</div></foreignObject></g></g></g></g></g></g></svg></pre>
+6. Cool! Finally, befor using the action, you just need to let the Debug Panel know that it should link the new debug action with the new widget prefab.
 
+    ```csharp
+     UDebugPanel.RegisterWidgetPrefab<InfoDebugAction>(InfoDebugActionWidgetPrefab);
+    ```
+6. That's it. Everything is set up for using your new debug action.
+> [!NOTE]
+> You can see an example of a custom widget at the example scene DebugPanel.CustomWidgets.
