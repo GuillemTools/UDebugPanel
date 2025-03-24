@@ -207,7 +207,7 @@ This is the most important part of this asset, the debug actions (or widgets). O
 > [!NOTE]
 > You can see this functionality on the example DebugPanel.Widgets.
 
-### Creating more debug options
+### Creating more debug actions
 Some times, your game may have specific needs that cannot be properly met by the default provided widgets. That's why you can create your own.
 We are going to use the Info action as an example.
 
@@ -286,3 +286,7 @@ We should first set the information that the action will hold. In this case it's
 6. That's it. Everything is set up for using your new debug action.
 > [!NOTE]
 > You can see an example of a custom widget at the example scene DebugPanel.CustomWidgets.
+
+### Creating more popups
+> [!NOTE]
+> You can see an example of how to create custom popups on DebugPanel.CustomPopups.
