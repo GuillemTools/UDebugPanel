@@ -8,7 +8,7 @@ A debug panel, is a user interface that provides developers with tools and infor
 
 This asset provides a suit of premade elements (buttons, int selector, float selector, enum selection, etc), while allowing for the creation of new ones, with ease.
 
-![OptionsArt](https://github.com/Guillemsc/GDebugPanelGodot/assets/17142208/139736d6-ffb8-4f85-a962-14597b93723c)
+![DebugPanel_MainScreenshot](https://github.com/user-attachments/assets/49f453aa-c863-47fd-8a20-1524ad3b959b)
 
 ## 🍰 Features
 - **Simple API**: Unity Debug Panel provides an intuitive and easy-to-use API with C#.
