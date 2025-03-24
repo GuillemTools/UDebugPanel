@@ -62,6 +62,17 @@ To quickly check if everything has been setup properly, you can go to DebugPanel
     ```csharp
     UDebugPanel.Toggle();
     ```
+### Automatic Toggle 
+We already provide some handy automatic input toggles for you.
+```csharp
+UDebugPanel.SetupToggleInput();
+```
+By calling ```UDebugPanel.SetupToggleInput()```, you will automatically setup toggle for:
+- Keyboard F1 key.
+- Middle mouse button.
+- Triple finger tap on screen.
+  
+You can modify this behaviour using the method parameters.
 
 ### Sections
 Debug actions are divided within different sections. These sections allow you to better organize your actions.
