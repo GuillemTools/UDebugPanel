@@ -16,7 +16,7 @@ This asset provides a suit of premade elements (buttons, int selector, float sel
     UDebugPanel.Show();
     UDebugPanel.Hide();
 
-    IDebugActionsSection section = GDebugPanel.AddSection("Section name");
+    IDebugActionsSection section = UDebugPanel.AddSection("Section name");
     section.AddButton("Button name", () => Debug.Log("Button click"));
     ```
 
