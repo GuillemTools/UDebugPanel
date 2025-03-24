@@ -204,8 +204,18 @@ This is the most important part of this asset, the debug actions (or widgets). O
     TestEnum _elementEnumSelected = TestEnum.Element1;
     section.AddButtonEnumSelector("Button name",  i => _elementEnumSelected = i, () => _elementEnumSelected);
     ```
+#### Nested Containers:
+- Nested conatiner: a button that opens a popup which can have more debug actions.
+    ```csharp
+    section.AddButtonActionsContainer("Actions", s =>
+    {
+        s.AddButton("Another Button 1", () => Debug.Log("Button pressed"));
+        s.AddButton("Another Button 2", () => Debug.Log("Button pressed"));
+        s.AddButton("Another Button 3", () => Debug.Log("Button pressed"));
+    });
+    ```
 > [!NOTE]
-> You can see this functionality on the example DebugPanel.Widgets.
+> You can see debug actions functionality on the example DebugPanel.Widgets.
 
 ### Creating more debug actions
 Some times, your game may have specific needs that cannot be properly met by the default provided widgets. That's why you can create your own.
