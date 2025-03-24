@@ -275,7 +275,7 @@ This is the most important part of this asset, the debug actions (or widgets). O
 Some times, your game may have specific needs that cannot be properly met by the default provided widgets. That's why you can create your own.
 We are going to use the Info action as an example.
 
-1. The first thing you need to do is create a new class and inherit from `DebugAction`. This interface will force you to implement `DebugActionWidget InitWidget(RectTransform popupsParent, DebugActionWidget viewInstance)` method, which is responsable for setting  the values from the action, to the widget Ui. We will not implement it for now.
+1. The first thing you need to do is create a new class and inherit from `DebugAction`. This interface will force you to implement `DebugActionWidget InitWidget(DebugActionWidget viewInstance)` method, which is responsable for setting  the values from the action, to the widget Ui. We will not implement it for now.
 We should first set the information that the action will hold. In this case it's a string for the info.
 
     ```csharp
@@ -289,7 +289,7 @@ We should first set the information that the action will hold. In this case it's
             ActionName = info; // ActionName is used for search box functionality
         }
 
-        public override void InitWidget(RectTransform popupsParent, DebugActionWidget viewInstance)
+        public override void InitWidget(DebugActionWidget viewInstance)
         {
             throw new NotImplementedException();
         }
@@ -324,7 +324,7 @@ We should first set the information that the action will hold. In this case it's
             ActionName = info;
         }
     
-        public override void InitWidget(RectTransform popupsParent, DebugActionWidget viewInstance)
+        public override void InitWidget(DebugActionWidget viewInstance)
         {
             InfoDebugActionWidget widget = (InfoDebugActionWidget)viewInstance;
             widget.Init(ActionName);
