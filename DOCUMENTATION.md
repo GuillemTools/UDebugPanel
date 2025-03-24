@@ -106,13 +106,22 @@ public sealed class ExampleOptionsObject
         Enum3,
         SomeLongValueThat,
     }
-    
+
+    [Category("Another Section")]
     public void ButtonExample() => Debug.Log("Button Action!");
+
     public bool ToggleExample { get; set; }
+
     public string DynamicInfoExample { get; set; } = "Dynamic Info";
+
     public string InfoExample => "Info";
+
+    [NumberRange(-10, 10)]
     public int IntExample { get; set; }
+
+    [NumberStep(2.5f)] 
     public float FloatExample { get; set; }
+
     public ExampleEnum EnumExample { get; set; }
 }
 ```
@@ -120,7 +129,7 @@ public sealed class ExampleOptionsObject
 Then we add the class like this:
 
 ```csharp
-UDebugPanel.AddSection("Section name", new ExampleOptionsObject());
+UDebugPanel.AddOptionsObject(new ExampleOptionsObject());
 ```
 
 And we will get debug options like this:
