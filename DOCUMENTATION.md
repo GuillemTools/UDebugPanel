@@ -28,7 +28,7 @@ This asset provides a suit of premade elements (buttons, int selector, float sel
 
     ![DebugPanel_AutomaticWidgetCreation](https://github.com/user-attachments/assets/ed1694a9-351c-488a-bf0c-8ce711da2be9)
 
-- **Organization**: Organize your options using collapsable sections.
+- **Organization**: Organize your options using sections.
 
     ![DebugPanel_Organization](https://github.com/user-attachments/assets/73da65f3-5a1c-4f06-a9cb-41538a685f22)
 
