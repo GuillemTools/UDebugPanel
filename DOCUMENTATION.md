@@ -215,7 +215,7 @@ This is the most important part of this asset, the debug actions (or widgets). O
     ![image](https://github.com/user-attachments/assets/c0f7458f-497b-41d2-a282-32c8f0d4efcf)
 
 #### Advanced Buttons:
-- Button large info: a button that opens a popup which can shown information as text.
+- Button large info: a button that opens a popup which can show information as text.
     ```csharp
     section.AddButtonLargeInfo("Button name", () => "This is some large info");
     ```
