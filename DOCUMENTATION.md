@@ -44,12 +44,15 @@ When is hidden again, the panel is completely destroyed, so it does not affect t
 Download and import from the Unity Asset Store. You can move the root folder anywhere you want in your project. 
 The package has the following dependencies:
 - [TextMeshPro](https://docs.unity3d.com/Packages/com.unity.ugui@2.0/manual/TextMeshPro/index.html) (Mandatory).
+
+> [!NOTE]
+> If you are using [Assembly Definitions](https://docs.unity3d.com/2020.1/Documentation/Manual/ScriptCompilationAssemblyDefinitionFiles.html), you may need to include the DebugPanel.Runtime assembly.
   
 > [!NOTE]
-> Works with both New and Old input systems
+> Works with both [New](https://docs.unity3d.com/Packages/com.unity.inputsystem@1.14/manual/index.html) and Old Input Systems
 
 ## ✔️ After installing
-To quickly check if everything has been setup properly, you can go to DebugPanel/Examples/Scenes/ and open any of the example scenes. When you run any of those scenes, a simple functionality example should play.
+To quickly check if everything has been setup properly, you can go to `DebugPanel/Examples/Scenes/` and open any of the example scenes. When you run any of those scenes, a simple functionality example should play.
 
 ## 📚 Getting started
 ### Showing / Hiding
