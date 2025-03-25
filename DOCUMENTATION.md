@@ -46,7 +46,7 @@ The package has the following dependencies:
 - [TextMeshPro](https://docs.unity3d.com/Packages/com.unity.ugui@2.0/manual/TextMeshPro/index.html) (Mandatory).
 
 > [!NOTE]
-> If you are using [Assembly Definitions](https://docs.unity3d.com/2020.1/Documentation/Manual/ScriptCompilationAssemblyDefinitionFiles.html), you may need to include the DebugPanel.Runtime assembly.
+> If you are using [Assembly Definitions](https://docs.unity3d.com/2020.1/Documentation/Manual/ScriptCompilationAssemblyDefinitionFiles.html), you may need to include the DebugPanel.Runtime assembly to your assemblies.
   
 > [!NOTE]
 > Works with both [New](https://docs.unity3d.com/Packages/com.unity.inputsystem@1.14/manual/index.html) and Old Input Systems.
