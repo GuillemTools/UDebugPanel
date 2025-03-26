@@ -17,6 +17,10 @@ If you find any issue, please report it [here](https://github.com/GuillemUnity/U
 2. [Installation](#-installation)
 3. [After Installing](#%EF%B8%8F-after-installing)
 4. [Getting Started](#-getting-started)
+5. [Sections](#-sections)
+6. [Automatic Debug Actions](#-automatic-debug-actions)
+7. [Manual Debug Actions](#-manual-debug-actions)
+8. [Custom Debug Actions](#-custom-debug-actions)
 
 ## 🍰 Features
 - **Simple API**: Unity Debug Panel provides an intuitive and easy-to-use API with C#.
@@ -99,7 +103,7 @@ UDebugPanel.SetControllerSupport(true);
 
 ![DebugPanel_ControllerInput](https://github.com/user-attachments/assets/bf87e1c7-ebe7-4dec-bfd6-c9b4035e21b3)
 
-### Sections
+## 📂Sections
 Debug actions are divided within different sections. These sections allow you to better organize your actions.
 You cannot create a debug action outside of a section.
 - **Creating** a new section is very simple, you just need to call `AddSection` and provide a section name: 
@@ -116,7 +120,7 @@ You cannot create a debug action outside of a section.
 > [!NOTE]
 > You can see this functionality on the example DebugPanel.Sections.
 
-### Automatic debug actions
+## 🤖 Automatic debug actions
 This asset has the ability of scanning for properties and methods in C# classes, to automatically create the adecuate widgets.
 
 One of such classes may look like this:
@@ -172,7 +176,7 @@ And we will get debug options like this:
 > You can see this functionality on the example DebugPanel.Reflection.
 
  
-### Manual debug actions
+## ▶️ Manual debug actions
 This is the most important part of this asset, the debug actions (or widgets). Once you have a section, you add debug actions to it:
 
 #### Info:
@@ -282,7 +286,7 @@ This is the most important part of this asset, the debug actions (or widgets). O
 > [!NOTE]
 > You can see debug actions functionality on the example DebugPanel.Widgets.
 
-### Creating more debug actions
+## 🆕 Creating more debug actions
 Some times, your game may have specific needs that cannot be properly met by the default provided widgets. That's why you can create your own.
 We are going to use the Info action as an example.
 
