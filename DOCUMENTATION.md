@@ -12,6 +12,12 @@ If you find any issue, please report it [here](https://github.com/GuillemUnity/U
 
 ![DebugPanel_MainScreenshot](https://github.com/user-attachments/assets/49f453aa-c863-47fd-8a20-1524ad3b959b)
 
+## 📋 Table of Contents
+1. [Features](#-features)
+2. [Installation](#-installation)
+3. [After Installing](#%EF%B8%8F-after-installing)
+4. [Getting Started](#-getting-started)
+
 ## 🍰 Features
 - **Simple API**: Unity Debug Panel provides an intuitive and easy-to-use API with C#.
     ```csharp
