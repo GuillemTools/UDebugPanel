@@ -8,6 +8,8 @@ A debug panel, is a user interface that provides developers with tools and infor
 
 This asset provides a suit of premade elements (buttons, int selector, float selector, enum selection, etc), while allowing for the creation of new ones, with ease.
 
+If you find any issue, please report it [here](https://github.com/GuillemUnity/UnityDebugPanel/issues).
+
 ![DebugPanel_MainScreenshot](https://github.com/user-attachments/assets/49f453aa-c863-47fd-8a20-1524ad3b959b)
 
 ## 🍰 Features
