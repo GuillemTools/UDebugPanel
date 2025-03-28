@@ -1,6 +1,6 @@
 ![DebugPanel_GithubBanner](https://github.com/user-attachments/assets/ddbd1616-6055-4c13-b566-d1306ea06e00)
 
-Unity Debug Panel is a lightweight and versatile ingame debug panel for Unity with C#. 
+Debug Panel is a lightweight and versatile ingame debug panel for Unity with C#. 
 It can be incredible useful to be able to modify gameplay parameters while on the target device. 
 This asset simplifies the process of creating a panel with debut options in your Unity projects, allowing you to focus on what matters: gameplay.
 
