@@ -1,4 +1,4 @@
-# Unity Debug Panel
+# UDebug Panel
 
 ## 📖 Overview
 This repository contains documentation and changelog of the Debug Panel Unity asset.
