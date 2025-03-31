@@ -1,5 +1,5 @@
 {
-  "name": "com.guillemtools.debugpanel",
+  "name": "com.guillemunity.debugpanel",
   "version": "1.1.0",
   "displayName": "Debug Panel",
   "description": "Debug Panel to quickly add debug capabilities to a game",
