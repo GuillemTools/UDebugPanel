@@ -50,7 +50,7 @@ If you find any issue, please report it [here](https://github.com/GuillemUnity/U
 
 
 - **Lightweight**: While your game is running, the panel does not exist at all until you want to show it.
-When is hidden again, the panel is completely destroyed, so it does not affect to the preformance of your game.
+When is hidden again, the panel is completely destroyed, so it does not impact the preformance of your game.
 
 ## 📦 Installation
 Download and import from the Unity Asset Store. You can move the root folder anywhere you want in your project. 
