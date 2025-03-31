@@ -44,13 +44,13 @@ If you find any issue, please report it [here](https://github.com/GuillemUnity/U
 
     ![DebugPanel_Organization](https://github.com/user-attachments/assets/73da65f3-5a1c-4f06-a9cb-41538a685f22)
 
-- **Fuzzy search**: Quicly find the options you were looking for with the search bar!
+- **Fuzzy search**: Quickly find the options you were looking for with the search bar!
 
     ![DebugPanel_FuzzySearch](https://github.com/user-attachments/assets/127754e0-5f44-463c-a746-ebb7d91c4dda)
 
 
 - **Lightweight**: While your game is running, the panel does not exist at all until you want to show it.
-When is hidden again, the panel is completely destroyed, so it does not impact the preformance of your game.
+When is hidden again, the panel is completely destroyed, so it does not impact the performance of your game.
 
 ## 📦 Installation
 Download and import from the Unity Asset Store. You can move the root folder anywhere you want in your project. 
