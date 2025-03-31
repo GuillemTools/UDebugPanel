@@ -10,6 +10,8 @@ This asset provides a suit of premade elements (buttons, int selector, float sel
 
 If you find any issue, please report it [here](https://github.com/GuillemUnity/UnityDebugPanel/issues).
 
+**[TRY THE WEB DEMO](https://guillemtools.github.io/UDebugPanel-Demo/)**
+
 ![DebugPanel_MainScreenshot](https://github.com/user-attachments/assets/49f453aa-c863-47fd-8a20-1524ad3b959b)
 
 ## 📋 Table of Contents
