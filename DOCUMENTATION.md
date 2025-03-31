@@ -122,7 +122,9 @@ You cannot create a debug action outside of a section.
 
 ## 🤖 Automatic Debug Actions
 This asset has the ability of scanning for properties and methods in C# classes, to automatically create the adecuate widgets.
+By default, only public properties are used for creating debug actions, the rest are ignored (unless specified with the attribute ShowAsDebugAction).
 
+### Adding Objects
 One of such classes may look like this:
 
 ```csharp
@@ -146,11 +148,22 @@ class Options
     public float FloatValue => FloatProperty;
     public long LongValue => LongProperty;
     public bool BoolValue => BoolProperty;
+
+    [DontShowAsDebugAction]
     public EnumProperty EnumValue => EnumProperty;
+            
+    [ShowAsDebugAction]
+    EnumProperty PrivateEnumValue { get; set; }
             
     public void Method()
     {
         Debug.Log("Calling Method");
+    }
+
+    [ShowAsDebugAction]
+    void PrivateMethod()
+    {
+         Debug.Log("Calling Private Method");
     }
             
     [Category("Another Section")]
@@ -171,6 +184,38 @@ And we will get debug options like this:
 
 ![Reflection](https://github.com/user-attachments/assets/b4c068de-7087-4c2d-84d3-7e2a72d6b403)
 
+### Adding Static Objects
+You can also use static classes to define your debug actions, by using the attribute `[DebugActionsObject]`. 
+Then, call `UDebugPanel.AddGlobalOptionsObject()` once to automatically add all the static classes with the attribute as debug actions.
+
+```csharp
+[DebugActionsObject]
+static class OptionsAutomatic
+{
+    public static int IntProperty { get; set; }
+            
+    [NumberStep(2.5f)] 
+    public static float FloatProperty { get; set; }
+            
+    [NumberRange(-10, 10)] 
+    public static long LongProperty { get; set; }
+}
+```
+
+Then we add all the classes like this:
+
+```csharp
+UDebugPanel.AddGlobalOptionsObjects();
+```
+
+### Reflection Attributes
+We provide several attributes to add felxibility to the automatic debug actions creation:
+- DisplayName: Sets a custom name for your debug action.
+- Category: Sets the section where the debug action will be created.
+- NumberStep(number): for number properties (int, float, long), allows to set the step used when clicking on the widget left or right arrows.
+- NumberRange(numberMin, numberMax): for number properties (int, float, long), allows to set a minimum and maximum value on the widget.
+- ShowAsDebugAction: Cretes the debug action when the property is private.
+- DontShowAsDebugAction: Does not create the debug action when the property is public.
 
 > [!NOTE]
 > You can see this functionality on the example DebugPanel.Reflection.
