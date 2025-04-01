@@ -1,7 +1,7 @@
 # Changelog
 
 ## v1.1.1 
-- Improved Game Example
+- Improved Game Example.
 
 ## v1.1.0
 - Added UDebugPanel.AddGlobalOptionsObjects() that gathers all the static classes that have the [DebugActionsObject] attribute, and creates debug actions from them.
