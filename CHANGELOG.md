@@ -1,5 +1,8 @@
 # Changelog
 
+## v1.1.2
+- Added Welcome window that appears the first time you import the asset.
+
 ## v1.1.1 
 - Improved Game Example.
 
