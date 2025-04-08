@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.1.3
+- Added support for Enter Play Mode Options - Reload Domain disabled.
+- Added methods for build stripping: UDebugPanelBuildUtils.StripFromBuild and UDebugPanelBuildUtils.UnstripFromBuild.
+
 ## v1.1.2
 - Added Welcome window that appears the first time you import the asset.
 
