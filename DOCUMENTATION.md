@@ -23,6 +23,7 @@ If you find any issue, please report it [here](https://github.com/GuillemUnity/U
 6. [Automatic Debug Actions](#-automatic-debug-actions)
 7. [Manual Debug Actions](#%EF%B8%8F-manual-debug-actions)
 8. [Custom Debug Actions](#-creating-more-debug-actions)
+9. [Build Stripping](#-build-stripping)
 
 ## 🍰 Features
 - **Simple API**: Unity Debug Panel provides an intuitive and easy-to-use API with C#.
@@ -416,3 +417,35 @@ We should first set the information that the action will hold. In this case it's
 ### Creating more popups
 > [!NOTE]
 > You can see an example of how to create custom popups on DebugPanel.CustomPopups.
+
+## 🧹 Build Stripping
+When building your game for production, you may want to remove the Resources/UDebugPanel.prefab, since it won't be used.
+By default, Resources files are included in the build. To avoid that, we provide some functionality that can be hooked up to your build process.
+
+- `UDebugPanelBuildUtils.StripFromBuild();`: hides the prefab from the Unity build system.
+- `UDebugPanelBuildUtils.UnstripFromBuild();`: makes the prefab visible again for Unity.
+
+For production builds, these two methods can be used on a Build hook script, like this:
+```csharp
+public class MyBuildHooks : IPreprocessBuildWithReport, IPostprocessBuildWithReport
+{
+    // Called before the build starts
+    public void OnPreprocessBuild(BuildReport report)
+    {
+        UDebugPanelBuildUtils.StripFromBuild();
+    }
+
+    // Called after the build finishes
+    public void OnPostprocessBuild(BuildReport report)
+    {
+        UDebugPanelBuildUtils.UnstripFromBuild();
+    }
+
+    // Determines the order if multiple preprocessors exist
+    public int callbackOrder => 0;
+}
+```
+This ensures that the prefab is not on the build, but its ready again when the build finishes!
+
+> [!NOTE]
+> You may need to include the DebugPanel.Editor Assembly to your assemblies.
