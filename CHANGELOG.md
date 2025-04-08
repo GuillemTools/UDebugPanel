@@ -1,5 +1,8 @@
 # Changelog
 
+## v1.2.0
+- Added previous section functionality.
+
 ## v1.1.3
 - Added support for Enter Play Mode Options - Reload Domain disabled.
 - Added methods for build stripping: UDebugPanelBuildUtils.StripFromBuild and UDebugPanelBuildUtils.UnstripFromBuild.
