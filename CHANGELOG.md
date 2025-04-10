@@ -1,5 +1,8 @@
 # Changelog
 
+## v1.2.1
+- On editor, focus on text input on string input popup and actions popup.
+
 ## v1.2.0
 - Added previous section functionality.
 
