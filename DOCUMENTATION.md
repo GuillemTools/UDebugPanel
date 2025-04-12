@@ -452,5 +452,5 @@ This ensures that the prefab is not on the build, but its ready again when the b
 > You may need to include the DebugPanel.Editor Assembly to your assemblies.
 
 ## **[⭐ RATE ASSET](https://assetstore.unity.com/packages/tools/utilities/udebug-panel-314259#reviews)**
-If the documentation was helpful and you enjoy our asset, please we kindly ask you to [rate the asset on the Asset Store](https://assetstore.unity.com/packages/tools/utilities/udebug-panel-314259#reviews), since it helps us a lot ❤️.
+If you found the documentation helpful and are enjoying our asset, we'd truly appreciate it if you could [leave a positive rating on the Asset Store](https://assetstore.unity.com/packages/tools/utilities/udebug-panel-314259#reviews) — it really helps us out ❤️.
 
