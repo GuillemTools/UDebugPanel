@@ -10,7 +10,7 @@ This asset provides a suit of premade elements (buttons, int selector, float sel
 
 If you find any issue, please report it [here](https://github.com/GuillemUnity/UnityDebugPanel/issues).
 
-**[TRY THE WEB DEMO](https://guillemtools.github.io/UDebugPanel-Demo/)**
+**[TRY THE WEB DEMO](https://guillemtools.github.io/UDebugPanel-Demo/)**  |  **[RATE ASSET](https://assetstore.unity.com/packages/tools/utilities/udebug-panel-314259#reviews)**
 
 ![DebugPanel_MainScreenshot](https://github.com/user-attachments/assets/49f453aa-c863-47fd-8a20-1524ad3b959b)
 
@@ -24,6 +24,7 @@ If you find any issue, please report it [here](https://github.com/GuillemUnity/U
 7. [Manual Debug Actions](#%EF%B8%8F-manual-debug-actions)
 8. [Custom Debug Actions](#-creating-more-debug-actions)
 9. [Build Stripping](#-build-stripping)
+10. [Rate Asset](#-rate-asset)
 
 ## 🍰 Features
 - **Simple API**: Unity Debug Panel provides an intuitive and easy-to-use API with C#.
@@ -449,3 +450,7 @@ This ensures that the prefab is not on the build, but its ready again when the b
 
 > [!NOTE]
 > You may need to include the DebugPanel.Editor Assembly to your assemblies.
+
+## **[⭐ RATE ASSET](https://assetstore.unity.com/packages/tools/utilities/udebug-panel-314259#reviews)**
+If the documentation was helpful and you enjoy our asset, please we kindly ask you to [rate the asset on the Asset Store](https://assetstore.unity.com/packages/tools/utilities/udebug-panel-314259#reviews), since it helps us a lot ❤️.
+
