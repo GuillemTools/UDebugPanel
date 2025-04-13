@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.2.2
+- Fixed InvalidOperationException: Collection was modified when opening the panel.
+- Fixed exception when popups stack was not cleared.
+
 ## v1.2.1
 - On editor, focus on text input on string input popup and actions popup.
 
