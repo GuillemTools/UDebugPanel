@@ -1,5 +1,19 @@
 # Changelog
 
+## v1.3.0
+- Renamed AddButtonListSelector to AddButtonListInput.
+- Renamed AddButtonElementListSelector to AddButtonListSelector.
+- Added new AddButtonStringSelector. 
+- Added UDebugPanel.Popups.AddActionsContainerPopup.
+- Added DebugPanel.Popups.AddConsolePopup.
+
+## v1.2.4
+- Removed test file that could cause issues when building.
+
+## v1.2.3
+- Improved console popup and added an example on how to use it.
+- Fixed exception when there is not an EventSystem.current.
+
 ## v1.2.2
 - Fixed InvalidOperationException: Collection was modified when opening the panel.
 - Fixed exception when popups stack was not cleared.
