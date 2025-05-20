@@ -288,29 +288,36 @@ This is the most important part of this asset, the debug actions (or widgets). O
 
 - Button string input: a button that opens a popup where you can set a string value.
     ```csharp
-    string _stringInput = "Empty";
-    section.AddButtonStringInput("Button name", () => _stringInput, v => _stringInput = v);
+    section.AddButtonStringInput("Button name", () => "Empty", v => Debug.Log($"Selected {v}");
     ```
     ![image](https://github.com/user-attachments/assets/ecf2c7cc-7086-445c-a4d4-8058f89972d7)
     ![image](https://github.com/user-attachments/assets/1388186d-1332-43b8-9342-b88942960f64)
 
-- Button list selector: a button that opens a popup where you can select an item from a list of items.
+- Button string selector: a button that opens a popup where you can select a string value. The current selected value is stored and shown on the button text.
+    ```csharp
+    string _stringValue= "Empty";
+    section.AddButtonStringSelector("Button name", () => _stringValue, v => _stringValue = v);
+    ```
+    ![image](https://github.com/user-attachments/assets/7e565153-c338-4218-8c4f-dd8ce4cfe551)
+    ![image](https://github.com/user-attachments/assets/1388186d-1332-43b8-9342-b88942960f64)
+
+- Button list input: a button that opens a popup where you can select an item from a list of items.
     ```csharp
     List<string> _elementsList = new() {"Element1", "Element2", "Element3"};
-    section.AddButtonListSelector("Button name", () => _elementsList, i => Debug.Log($"Selected {_elementsList[i]}"));
+    section.AddButtonListInput("Button name", () => _elementsList, i => Debug.Log($"Selected {_elementsList[i]}"));
     ```
     ![image](https://github.com/user-attachments/assets/dc5d4abc-19a4-425a-a967-f5713d4741fd)
     ![image](https://github.com/user-attachments/assets/654d6ad0-7418-442a-a157-6409dd573dbb)
 
-- Button element list selector: a button that opens a popup where you can select an item from a list of items. The current selected value is stored internally and shown on the button text.
+- Button list selector: a button that opens a popup where you can select an item from a list of items. The current selected value is stored and shown on the button text.
     ```csharp
     List<string> _elementsList = new() {"Element1", "Element2", "Element3"};
-    section.AddButtonElementListSelector("Button name", () => _elementsList, i => Debug.Log($"Selected {_elementsList[i]}"));
+    section.AddButtonListSelector("Button name", () => _elementsList, i => Debug.Log($"Selected {_elementsList[i]}"));
     ```
     ![image](https://github.com/user-attachments/assets/894fa82e-253b-49cb-aaf6-79b5696787da)
     ![image](https://github.com/user-attachments/assets/e7fb5daf-1327-4fd4-b768-e56fd92a6303)
 
-- Button enum selector: a button that opens a popup where you can select the value of an enum. The current selected value is stored internally and shown on the button text.
+- Button enum selector: a button that opens a popup where you can select the value of an enum. The current selected value is stored and shown on the button text.
     ```csharp
     TestEnum _elementEnumSelected = TestEnum.Element1;
     section.AddButtonEnumSelector("Button name",  i => _elementEnumSelected = i, () => _elementEnumSelected);
